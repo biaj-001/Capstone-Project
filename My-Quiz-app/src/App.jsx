@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
+import { useState } from "react";
+import HomePage from "./pages/HomePage";
+import QuizPage from "./pages/QuizPage";
 
+export default function App() {
+  const [settings, setSettings] = useState(null);
 
-function App() {
- 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <Header />
-      <Footer />
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      {settings ? (
+        <QuizPage settings={settings} onExit={() => setSettings(null)} />
+      ) : (
+        <HomePage onStart={(options) => setSettings(options)} />
+      )}
     </div>
   );
 }
-
-export default App;
