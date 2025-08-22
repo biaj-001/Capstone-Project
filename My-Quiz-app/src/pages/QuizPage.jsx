@@ -11,9 +11,8 @@ export default function QuizPage({ settings, onExit }) {
   const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    const { category, difficulty } = settings;
-    // Always fetch 10 questions
-    const url = `https://opentdb.com/api.php? amount=10 &category=${category}&difficulty=${difficulty}&type=multiple`;
+    const { amount, category, difficulty } = settings;
+    const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`;
 
     fetch(url)
       .then((res) => res.json())
@@ -35,10 +34,10 @@ export default function QuizPage({ settings, onExit }) {
 
   const handleAnswer = (answer) => {
     if (answer === questions[current].correct) {
-      setScore((prev) => prev + 1);
+      setScore(score + 1);
     }
     if (current + 1 < questions.length) {
-      setCurrent((prev) => prev + 1);
+      setCurrent(current + 1);
     } else {
       setFinished(true);
     }
